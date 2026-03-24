@@ -1,0 +1,19 @@
+\frametitle{Simulation Code}
+
+\begin{lstlisting}
+plt.annotate(f'P(X \u2264 1) = {p_le_1:.4f}\n(11/28)',
+             (1, p_le_1), textcoords="offset points", xytext=(-40,15), ha='center',
+             bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="gray", lw=1))
+
+plt.axvline(1, color='red', linestyle='--', alpha=0.5)
+plt.axhline(p_le_1, color='red', linestyle='--', alpha=0.5)
+
+plt.xlabel('x')
+plt.ylabel('F(x)')
+plt.grid(True, alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.savefig("Figs/cdf.png")
+plt.show()
+
+\end{lstlisting}
