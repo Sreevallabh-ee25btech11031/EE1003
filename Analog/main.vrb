@@ -1,0 +1,21 @@
+\frametitle{Simulation Code (NGSPICE)}
+
+\begin{lstlisting}[style = spice]
+*1.1.31
+
+V1 in 0 PULSE(0 5 0 1ns 1ns 0.5s 1s)
+R1 in x 1k
+L1 x 0 10m
+
+.control
+tran 0.01us 50us
+
+let Ch1 = v(in) - v(x)
+let Ch2 = -v(x)
+
+plot Ch1 Ch2
+.endc
+
+
+\end{lstlisting}
+
