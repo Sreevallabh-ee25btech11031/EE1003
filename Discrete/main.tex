@@ -1,0 +1,327 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage{tkz-euclide} 
+\usepackage{listings}                                      
+\def\inputGnumericTable{}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\usepackage{tcolorbox}
+\tcbuselibrary{minted,breakable,xparse,skins}
+
+
+
+\definecolor{bg}{gray}{0.95}
+\DeclareTCBListing{mintedbox}{O{}m!O{}}{%
+  breakable=true,
+  listing engine=minted,
+  listing only,
+  minted language=#2,
+  minted style=default,
+  minted options={%
+    linenos,
+    gobble=0,
+    breaklines=true,
+    breakafter=,,
+    fontsize=\small,
+    numbersep=8pt,
+    #1},
+  boxsep=0pt,
+  left skip=0pt,
+  right skip=0pt,
+  left=25pt,
+  right=0pt,
+  top=3pt,
+  bottom=3pt,
+  arc=5pt,
+  leftrule=0pt,
+  rightrule=0pt,
+  bottomrule=2pt,
+  toprule=2pt,
+  colback=bg,
+  colframe=orange!70,
+  enhanced,
+  overlay={
+    \begin{tcbclipinterior}
+    \fill[orange!20!white] (frame.south west) rectangle ([xshift=20pt]frame.north west);
+    \end{tcbclipinterior}},
+  #3,
+}
+\lstset{
+    language=python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+
+% --- Define SPICE Language ---
+\lstdefinelanguage{Spice}{
+    morekeywords={.tran, .dc, .ac, .model, .subckt, .ends, .include, .lib, .param, .options, .print, .plot, .end, .ic},
+    morecomment=[l]{*}, % SPICE comments start with an asterisk
+    morestring=[b]",
+    sensitive=false,
+}
+
+% --- Define SPICE Style ---
+\lstdefinestyle{spice}{
+    language=Spice,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black}\itshape,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+    frame=single, % Adds a subtle border around the code
+    rulecolor=\color{gray!40},
+    backgroundcolor=\color{gray!5},
+}
+
+\title 
+{1.2.31}
+\date{}
+
+
+\author 
+{Sai Sreevallabh - EE25BTECH11031}
+
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Question}
+
+The smallest degree of the polynomial that interpolates the given data is
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$x$ & -2 & -1 & 0 & 1 & 2 & 3 \\
+\hline
+$f(x)$ & -58 & -21 & -12 & -13 & -6 & 27 \\
+\hline
+\end{tabular}
+\end{center}
+    
+\end{frame}
+
+\begin{frame}{Finite Differences Method}
+
+\begin{itemize}
+    \item The method of Finite Differences is a method used to determine the degree of a polynomial when given the value of the polynomial at equally spaced inputs, as given in the question. 
+    \item It involves calculating the difference between consecutive $y$-values to create a new sequence called "first differences." This process is repeated on the newly formed sequence to find "second differences," then "third differences," and so on.
+    \item The degree of teh polynomial is n if all the nth differences are equal. 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Why this Method Works}
+
+\begin{itemize}
+    \item These finite differences are the finite, discrete analogue of derivatives.  
+    \item We know that an nth degree polynomial has zero nth derivative.
+    \item Similarly, an n degree polynomial will have the nth differences as same. 
+    \item By consecutively calculating the differences until a constant level is reached, we can determine the degree of the polynomial. 
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Theoretical Solution}
+
+\begin{center}
+\begin{tabular}{ccccc}
+$x$ & $f(x)$ & 1st Diff ($\Delta f$) & 2nd Diff ($\Delta^2 f$) & 3rd Diff ($\Delta^3 f$) \\
+\\
+-2 & -58 & & & & \\
+   &     & -21 - (-58) = \textbf{37} & & \\
+-1 & -21 & & 9 - 37 = \textbf{-28} & \\
+   &     & -12 - (-21) = \textbf{9} & & -10 - (-28) = \textbf{18} \\
+ 0 & -12 & & -1 - 9 = \textbf{-10} & \\
+   &     & -13 - (-12) = \textbf{-1} & & 8 - (-10) = \textbf{18} \\
+ 1 & -13 & & 7 - (-1) = \textbf{8} & \\
+   &     & -6 - (-13) = \textbf{7} & & 26 - 8 = \textbf{18} \\
+ 2 &  -6 & & 33 - 7 = \textbf{26} & \\
+   &     & 27 - (-6) = \textbf{33} & & \\
+ 3 &  27 & & & & \\
+\end{tabular}
+\end{center}
+    
+\end{frame}
+
+\begin{frame}{Lagrange's Method of Interpolation:}
+
+\begin{itemize}
+    \item Interpolation of a graph is the mathematical method of estimating unknown, intermediate data points between a discrete set of known data points.
+    \item The Lagrange method for interpolation is widely used. This gives the expression for the lowest degree polynomial which passes through all the given data points. 
+    \item This is implemented in the scipy.interpolate library. 
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Frame Title}
+
+\begin{itemize}
+    \item This method used to find the unique polynomial of lowest degree that fits a set of data points, regardless of whether the $x$-values are equally spaced.
+    \item This is achieved by building specific basis polynomials, $L_i(x)$, which act as switches, going to $1$ at their corresponding data point $x_i$, and $0$ at all other known $x$-values in the set.
+\end{itemize}
+
+$$L_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}$$
+    
+\end{frame}
+
+\begin{frame}{Lagrange's Method For Interpolation}
+
+\begin{itemize}
+    \item The required polynomial can be given by
+    $$P(x) = \sum_{i=0}^{n} y_i L_i(x)$$
+    \item This method is tedious by calculating with hand, but gives the correct curve. 
+    \item However, for very large number of data points, if a high degree polynomial must be plotted, the plot exhibits violent oscillations near the edges of the interval. This instability is known as Runge's Phenomenon.
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Cubic Splines}
+
+\begin{itemize}
+    \item To counter that problem, Cubic Splines are used. 
+    \item Instead of a single global equation, a spline constructs a piecewise function made of multiple low-degree polynomials (degree 3 for cubic spline). 
+    \item The segments are stitched together at the data points keeping in mind certain rules, to ensure that the overall curve has continuous slope and curvatures. 
+    \item This is the method that is used for the interpolation of a graph accurately using SciPy. 
+\end{itemize}
+
+In the simulations provided, the number of data points is not high and hence, both Cubic Splines and Lagrange's method give the same graph. 
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Code for Finite Differences}
+
+\begin{lstlisting}
+import numpy as np
+
+y = np.array([-58, -21, -12, -13, -6, 27])
+
+#loop for calculating finite differences
+for n in range(1, len(y)):
+    
+    current_diff = np.diff(y, n=n)
+    print(f"{n} - Difference: {current_diff}")
+    
+    if np.all(current_diff == current_diff[0]):
+        print(f"The smallest degree of the polynomial is: {n}")
+        break
+\end{lstlisting}
+
+The above code uses the inbuilt finite differences calculator present in numpy: np.diff. 
+
+The code outputs the finite differences sequentially and the smallest degree of the polynomial. 
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simulation Code: Interpolation}
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import lagrange, CubicSpline
+
+x = np.array([-2, -1, 0, 1, 2, 3])
+y = np.array([-58, -21, -12, -13, -6, 27])
+
+#Finding the polynomial using lagrange's method
+poly_lagrange = lagrange(x, y)
+
+final_coeffs = [c for c in poly_lagrange.coeffs if abs(c) > 1e-10]
+clean_poly = np.poly1d(final_coeffs)
+true_degree = clean_poly.order
+
+poly_spline = CubicSpline(x,y)
+\end{lstlisting}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simulation Code: Interpolation}
+\begin{lstlisting}
+x_smooth = np.linspace(-3, 4, 100) 
+
+plt.plot(x_smooth, clean_poly(x_smooth), color='blue', linewidth=3, alpha=0.5, 
+         label=f'Lagrange')
+
+plt.plot(x_smooth, poly_spline(x_smooth), color='orange', linestyle='--', linewidth=2, 
+         label='Cubic Spline')
+plt.scatter(x, y, color='red', s=50, zorder=5, label='Data Points')
+
+\end{lstlisting}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simulation Code: Interpolation}
+
+\begin{lstlisting}
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.axhline(0, color='black', linewidth=0.8) # Draws the x-axis
+plt.axvline(0, color='black', linewidth=0.8) # Draws the y-axis
+plt.grid(True, linestyle=':', alpha=0.7)
+plt.legend()
+
+# Display the graph
+plt.savefig("../Figs/plot.png")
+plt.show()
+\end{lstlisting}
+
+
+    
+\end{frame}
+
+\begin{frame}{Simulation Plot}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figs/plot.png}
+\end{figure}
+    
+\end{frame}
+
+\end{document}

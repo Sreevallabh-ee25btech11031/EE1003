@@ -1,0 +1,17 @@
+\frametitle{Simulation Code: Interpolation}
+
+\begin{lstlisting}
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.axhline(0, color='black', linewidth=0.8) # Draws the x-axis
+plt.axvline(0, color='black', linewidth=0.8) # Draws the y-axis
+plt.grid(True, linestyle=':', alpha=0.7)
+plt.legend()
+
+# Display the graph
+plt.savefig("../Figs/plot.png")
+plt.show()
+\end{lstlisting}
+
+
+
