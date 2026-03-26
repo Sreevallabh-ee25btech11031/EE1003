@@ -1,21 +1,20 @@
-\frametitle{Simulation Code (NGSPICE)}
+\frametitle{Simulation Code (Python)}
+    \begin{lstlisting}
+ax = plt.gca()
+ax.spines['top'].set_color('none')
+ax.spines['bottom'].set_position('zero')
+ax.spines['right'].set_color('none')
+ax.spines['left'].set_position('zero')
+plt.legend(loc='best')
 
-\begin{lstlisting}[style = spice]
-*1.1.31
-
-V1 in 0 PULSE(0 5 0 1ns 1ns 0.5s 1s)
-R1 in x 1k
-L1 x 0 10m
-
-.control
-tran 0.01us 50us
-
-let Ch1 = v(in) - v(x)
-let Ch2 = -v(x)
-
-plot Ch1 Ch2
-.endc
+plt.minorticks_on()
+plt.grid(which='major', linestyle='-', linewidth='0.6', color='gray')
+plt.grid(which='minor', linestyle=':', linewidth='0.5', color='gray')
 
 
-\end{lstlisting}
+plt.savefig("../Figs/laplace.png")
+plt.show()
+
+    \end{lstlisting}
+
 

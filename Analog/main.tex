@@ -167,27 +167,105 @@ For the RL Circuit given in the figure, let the current be $i$. The circuit is d
 
 \begin{align*}
 V_{in} &= iR + L\frac{di}{dt}\\
-\frac{di}{V_{in} - iR} &= \frac{dt}{L}
 \end{align*}
 
 
+\end{frame}
+
+\begin{frame}{Theoretical Solution:}
+
+In s-domain, the inductor is modelled as a resistor with a resistance $sL$. Hence, the above given circuit is a voltage divider circuit with the transfer function of the voltage across the resistor given as :
+\begin{align}
+    H(s) = \frac{V_R(s)}{V_{in}(s)} = \frac{R}{sL + R} =  \frac{R/L}{s + R/L}
+\end{align}
+
+Hence, we have
+\begin{align}
+    V_R(s) = \frac{R/L}{s + R/L}V_{in}(s)\\
+    \implies V_R(s) = \frac{V_{in}(R/L)}{s\brak{s + R/L}}
+\end{align}
+
+
+    
+\end{frame}
+
+\begin{frame}{Theoretical Solution:}
+
+Breaking the equation into simpler fractions:
+\begin{align}
+    V_R(s) &= \frac{V_{in}}{s} - \frac{V_{in}}{s + R/L}
+\end{align}
+
+Using the below Inverse Laplace Transforms, we can convert back to time domain
+\begin{align*}
+    \mathcal{L}^{-1}\left\{\frac{1}{s}\right\} &= 1 \\
+    \mathcal{L}^{-1}\left\{\frac{1}{s - a}\right\} &= e^{at} \implies \mathcal{L}^{-1}\left\{\frac{1}{s + R/L}\right\} = e^{-\frac{R}{L}t}
+\end{align*}
+The time domain solution:
+\begin{align}
+    \implies V_R\brak{t} &= V_{in}\brak{1 - e^{-\frac{R}{L}t}}
+\end{align}
+    
 \end{frame}
 
 \begin{frame}{Theoretical Solution}
-Integrating both sides from assuming initial current $i(0) = 0$
-\begin{align*}
-\int_{0}^{i(t)} \frac{1}{V_{in} - i'R} \, di' &= \int_{0}^{t} \frac{1}{L} \, dt' \\
-\end{align*}
 
-Solving the integral, we get
-\begin{align*}
-    i(t) &= \frac{V_{in}}{R} \brak{1 - e^{-\frac{R}{L}t}}\\
+The time domain solution:
+\begin{align}
     \implies V_R\brak{t} &= V_{in}\brak{1 - e^{-\frac{R}{L}t}}
-\end{align*}
+\end{align}
 
 The waveform of Channel-1 of the DSO corresponds to this above equation. Hence, the signal probe ($S_1$) of the first channel is connected to point $A$ and ground probe ($G_1$) is connected to point $B$. 
-
+    
 \end{frame}
+
+
+
+% \begin{frame}{Theoretical Solution:}
+
+% Converting them to s-domain
+% \begin{align*}
+%     \mathcal{L}\{i(t)\} &= I(s) \\
+%     \mathcal{L}\left\{\frac{di(t)}{dt}\right\} &= sI(s) - i(0) = sI(s) \\
+%     \mathcal{L}\{V_0\} &= \frac{V_0}{s}
+% \end{align*}
+
+% The equation in s-domain is 
+% \begin{align}
+%     R I(s) + L[sI(s)] &= \frac{V_0}{s}\\
+%     \implies  I(s) &= \frac{V_0/L}{s(s + R/L)}
+% \end{align}
+    
+% \end{frame}
+
+% \begin{frame}{Theoretical Solution:}
+
+% Breaking the equation into simpler fractions:
+% \begin{align}
+%     I(s) &= \frac{V_0/R}{s} - \frac{V_0/R}{s + R/L}
+% \end{align}
+
+% Using the below Inverse Laplace Transforms, we can convert back to time domain
+% \begin{align*}
+%     \mathcal{L}^{-1}\left\{\frac{1}{s}\right\} &= 1 \\
+%     \mathcal{L}^{-1}\left\{\frac{1}{s - a}\right\} &= e^{at} \implies \mathcal{L}^{-1}\left\{\frac{1}{s + R/L}\right\} = e^{-\frac{R}{L}t}
+% \end{align*}
+
+% \end{frame}
+
+% \begin{frame}{Theoretical Solution}
+% Applying the above Inverse Laplace Transforms, we get the below time-domain equation
+% \begin{align}
+%     i(t) &= \frac{V_0}{R} \left(1 - e^{-\frac{R}{L}t}\right)
+% \end{align}
+% Since, $V_R(t) = Ri(t)$
+% \begin{align}
+%     \implies V_R\brak{t} &= V_{in}\brak{1 - e^{-\frac{R}{L}t}}
+% \end{align}
+
+% The waveform of Channel-1 of the DSO corresponds to this above equation. Hence, the signal probe ($S_1$) of the first channel is connected to point $A$ and ground probe ($G_1$) is connected to point $B$. 
+    
+% \end{frame}
 
 \begin{frame}{Theoretical Solution}
     Using $V_L = V_{in} - V_R$ we get
@@ -208,21 +286,66 @@ This is consistent with the fact that the ground probes of both the channels sho
     \frametitle{Simulation Code (Python)}
     \begin{lstlisting}
 import numpy as np
+import sympy as sp
 import matplotlib.pyplot as plt
 
 Vin = 5.0
 R = 1000.0
 L = 0.01
-T = L/R #time constant
+T = L/R #Time constant
 
-t = np.linspace(0, 5*T, 1000)
+t_int = np.linspace(0, 5*T, 1000)
 
-Vr = Vin*(1 - np.exp(-t/T)) #Voltage across resistor: ch-1
-Vl = Vin*np.exp(-t/T) #voltage across L: negative of ch-2
+t = sp.symbols('t')
+i = sp.Function('i')(t)
+s = sp.symbols('s')
 
-plt.plot(t, Vr, color = 'red', label = "Ch-1")
-plt.plot(t, -Vl, color = 'blue', label = "Ch-2")
+#Inputting the differential equation
+de = sp.Eq(L*(sp.diff(i, t)) + R*i , Vin)
+
+    \end{lstlisting}
+ 
+    
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Simulation Code (Python)}
+    \begin{lstlisting}
+#Converting the equation to Laplace Transform
+l_lhs = sp.laplace_transform(de.lhs, t, s, noconds = True)
+l_rhs = sp.laplace_transform(de.rhs, t, s, noconds = True)
+
+l_eq = sp.Eq(l_lhs, l_rhs)
+
+#Initial Conditions for solving
+initial_conditions = {i.subs(t, 0): 0}
+l_eq_subbed = l_eq.subs(initial_conditions)
+
+#Solving the s-domain equation
+I_s = sp.laplace_transform(i, t, s, noconds=True)
+I_s_solution = sp.solve(l_eq_subbed, I_s)[0]
+
+#Getting the time-domain solution
+i_t_sp = sp.inverse_laplace_transform(I_s_solution, s, t)
+
+    \end{lstlisting}
+ 
+    
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Simulation Code (Python)}
+    \begin{lstlisting}
+i_t = sp.lambdify(t, i_t_sp, modules=['numpy'])
+i_vals = i_t(t_int)
+
+Vr = R*i_vals
+Vl = Vin - Vr
+
+plt.plot(t_int, Vr, color = 'red', label = "Ch1")
+plt.plot(t_int, -Vl, color = 'blue', label = "Ch2")
 plt.axhline(y=5.0, color='gray', linestyle='--')
+
 
     \end{lstlisting}
  
@@ -239,58 +362,61 @@ ax.spines['right'].set_color('none')
 ax.spines['left'].set_position('zero')
 plt.legend(loc='best')
 
-
 plt.minorticks_on()
 plt.grid(which='major', linestyle='-', linewidth='0.6', color='gray')
 plt.grid(which='minor', linestyle=':', linewidth='0.5', color='gray')
 
+
+plt.savefig("../Figs/laplace.png")
 plt.show()
-plt.savefig("Figs/plot.png")
+
     \end{lstlisting}
+ 
     
 \end{frame}
+
 
 \begin{frame}{Simulation Plot}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\linewidth]{Figs/plot.png}
+    \includegraphics[width=0.9\linewidth]{Figs/laplace.png}
 \end{figure}
     
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Simulation Code (NGSPICE)}
+% \begin{frame}[fragile]
+% \frametitle{Simulation Code (NGSPICE)}
 
-\begin{lstlisting}[style = spice]
-*1.1.31
+% \begin{lstlisting}[style = spice]
+% *1.1.31
 
-V1 in 0 PULSE(0 5 0 1ns 1ns 0.5s 1s)
-R1 in x 1k
-L1 x 0 10m
+% V1 in 0 PULSE(0 5 0 1ns 1ns 0.5s 1s)
+% R1 in x 1k
+% L1 x 0 10m
 
-.control
-tran 0.01us 50us
+% .control
+% tran 0.01us 50us
 
-let Ch1 = v(in) - v(x)
-let Ch2 = -v(x)
+% let Ch1 = v(in) - v(x)
+% let Ch2 = -v(x)
 
-plot Ch1 Ch2
-.endc
+% plot Ch1 Ch2
+% .endc
 
 
-\end{lstlisting}
+% \end{lstlisting}
     
-\end{frame}
+% \end{frame}
 
-\begin{frame}{Simulation Plot NGSPICE}
+% \begin{frame}{Simulation Plot NGSPICE}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{Figs/plot_spice.png}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.75\linewidth]{Figs/plot_spice.png}
+% \end{figure}
     
-\end{frame}
+% \end{frame}
 
 
 \end{document}

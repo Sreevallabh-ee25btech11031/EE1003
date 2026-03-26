@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.13)  24 MAR 2026 17:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.13)  26 MAR 2026 16:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1964,9 +1964,13 @@ Package pdftex.def Info: Figs/question.png  used on input line 147.
 
 ] [5
 
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}] [6
+] [6
 
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}] [7
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}] [7
+
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}] [8
+
+] [9
 
 ]
 \openout4 = `main.vrb'.
@@ -1978,45 +1982,41 @@ LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-16.
+14.
 
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)) [8
+)) [10
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-ts1.enc}]
 \openout4 = `main.vrb'.
 
- (./main.vrb)
-[9
-
-]
-<Figs/plot.png, id=290, 462.528pt x 346.896pt>
-File: Figs/plot.png Graphic file (type png)
-<use Figs/plot.png>
-Package pdftex.def Info: Figs/plot.png  used on input line 260.
-(pdftex.def)             Requested size: 308.06367pt x 231.05875pt.
-
-Overfull \vbox (9.98799pt too high) detected at line 260
- []
-
-[10
-
- <./Figs/plot.png>]
-\openout4 = `main.vrb'.
-
  (./main.vrb) [11
 
 ]
-<Figs/plot_spice.png, id=348, 866.23625pt x 687.56876pt>
-File: Figs/plot_spice.png Graphic file (type png)
-<use Figs/plot_spice.png>
-Package pdftex.def Info: Figs/plot_spice.png  used on input line 293.
-(pdftex.def)             Requested size: 256.72147pt x 203.76476pt.
- [12
+\openout4 = `main.vrb'.
 
- <./Figs/plot_spice.png (PNG copy)>]
+ (./main.vrb) [12
+
+]
+\openout4 = `main.vrb'.
+
+ (./main.vrb) [13
+
+]
+<Figs/laplace.png, id=402, 462.528pt x 346.896pt>
+File: Figs/laplace.png Graphic file (type png)
+<use Figs/laplace.png>
+Package pdftex.def Info: Figs/laplace.png  used on input line 386.
+(pdftex.def)             Requested size: 308.06367pt x 231.05875pt.
+
+Overfull \vbox (9.98799pt too high) detected at line 386
+ []
+
+[14
+
+ <./Figs/laplace.png>]
 \tf@nav=\write9
 \openout9 = `main.nav'.
 
@@ -2035,25 +2035,32 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 58628 strings out of 474222
- 1384631 string characters out of 5748733
- 2390840 words of memory out of 5000000
- 79826 multiletter control sequences out of 15000+600000
- 593026 words of font info for 79 fonts, out of 8000000 for 9000
+ 58622 strings out of 474222
+ 1384554 string characters out of 5748733
+ 2379840 words of memory out of 5000000
+ 79813 multiletter control sequences out of 15000+600000
+ 592715 words of font info for 78 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  128i,15n,123p,1172b,1611s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/p
-ublic/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso10.pfb></usr/sh
-are/texmf/fonts/type1/public/lm/lmsso8.pfb></usr/share/texmf/fonts/type1/public
-/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lm
-tti10.pfb>
-Output written on main.pdf (12 pages, 519254 bytes).
+
+pdfTeX warning (dest): name{Navigation15} has been referenced but does not exis
+t, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Navigation16} has been referenced but does not exis
+t, replaced by a fixed one
+
+</usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr
+/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/pub
+lic/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso10.pfb></usr/shar
+e/texmf/fonts/type1/public/lm/lmsso8.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texm
+f/fonts/type1/public/lm/lmtt10.pfb>
+Output written on main.pdf (14 pages, 432047 bytes).
 PDF statistics:
- 437 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 25 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 491 PDF objects out of 1000 (max. 8388607)
+ 415 compressed objects within 5 object streams
+ 31 named destinations out of 1000 (max. 500000)
+ 89 words of extra memory for PDF output out of 10000 (max. 10000000)
 
